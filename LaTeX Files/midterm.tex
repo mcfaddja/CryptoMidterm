@@ -28,7 +28,7 @@
 \headsep = 22pt 
 \headheight = 15pt
 
-\doublespacing
+%\doublespacing
 
 % BEGIN PRE-AMBLE
 
@@ -152,13 +152,41 @@
 \prob{7} Each block in a cipher-text from an encryption, under \textbf{CBC} mode of operation, is dependent on either the cipher-text from the block before it or the value of \text{{\fontfamily{cmtt}\selectfont \textbf{IV}}}, they must be encrypted or decrypted serially.  Therefore, under the \textbf{CBC} mode of operation, there is no speed increase, in either encryption and decryption, available from parallel processing. \newline
 
 
+\vspace{0.25in}
+
+
+\subfile{subfiles/prob8}
+
+
+\vspace{0.25in}
+
+
+\numbpr{9}
+\prob{9}  
 
 
 
 
 
-\numbpr{14}
-\prob{14} Define the cipher-texts $c$ and $c'$, encrypted on a one-time pad with the same key, from messages $m$ and $m'$, respectively, as $c = m \oplus k$ and $c' = m' \oplus k$.  Now, \textbf{XOR} these expressions together to obtain
+
+\newpage
+
+
+
+
+
+
+
+
+\numbpr{10}
+\prob{10}  This scheme does not provide authentication.  In any \textbf{CPA} secure scheme, it is required that multiple, different messages can be encrypted into any arbitrary cipher-text with some non-zero probability.  Thus, we may have that $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_1 \right) = \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_2 \right) = c$ even if $m_1 \neq m_2$.  In this case $t_1 = t_2$ would be true.  This is due to the fact that the hash function in this scheme is not keyed, therefore any arbitrary cipher-text $c$ always yields the same tag $t = \text{\textbf{hash}} \left( c \right)$.  Therefore, this scheme only ensures that the cipher-text has not been tampered with, not that it is authentic.  It does nothing to ensure that the underlying message is being represented by the received cipher-text or the cipher-text itself are authentic. \newline
+
+
+\vspace{0.25in}
+
+
+\numbpr{11}
+\prob{11} Define the cipher-texts $c$ and $c'$, encrypted on a one-time pad with the same key, from messages $m$ and $m'$, respectively, as $c = m \oplus k$ and $c' = m' \oplus k$.  Now, \textbf{XOR} these expressions together to obtain
 
 \begin{align}
 c \oplus c' = \left( m \oplus k \right) \oplus \left( m' \oplus k \right) \notag
@@ -172,6 +200,32 @@ c \oplus c' = m \oplus m' \notag
 
 thereby giving an adversary a relation between cipher and message texts. \newline
 
+
+\vspace{0.25in}
+
+
+\numbpr{12}
+\prob{12} Encryption keys can be securely reused with a stream cipher through the use of random initialization vectors and augmented pseudo random functions, $G \left( IV, k \right)$ which accept both and initialization vector and a seed and remain pseudo random even when the $IV$ is known.  Is passed at the beginning of the current session so that {\fontfamily{cmtt}\selectfont \textbf{Enc}} is defined as
+
+\begin{align*}
+{\fontfamily{cmtt}\selectfont \textbf{Enc}} := \left\langle IV, G \left( k, IV \right) \oplus m \right\rangle
+\end{align*}
+
+Additionally, we have 
+
+
+\begin{align*}
+{\fontfamily{cmtt}\selectfont \textbf{Dec}} := G \left( k, IV \right) \oplus c
+\end{align*}
+
+as the new definition for {\fontfamily{cmtt}\selectfont \textbf{Dec}}. \newline
+
+
+\vspace{0.25in}
+
+
+\numbpr{13}
+\prob{13}
 
 
 

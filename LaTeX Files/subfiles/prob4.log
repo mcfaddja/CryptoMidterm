@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.11)  16 NOV 2016 20:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.11)  18 NOV 2016 13:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -350,12 +350,8 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             That can mean that you are not using pdfTeX 1.50 or
 (etexcmds)             that some package has redefined \expanded.
 (etexcmds)             In the latter case, load this package earlier.
-))))
-LaTeX Font Info:    Try loading font information for OT1+qbk on input line 31.
-
-(/usr/share/texmf/tex/latex/tex-gyre/ot1qbk.fd
-File: ot1qbk.fd 2009/09/25 v1.2 font definition file for OT1/qbk
-))) (./prob4.aux)
+))))))
+(./prob4.aux)
 \openout1 = `prob4.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 3.
@@ -370,7 +366,10 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
-
+LaTeX Font Info:    Try loading font information for OT1+qbk on input line 3.
+ (/usr/share/texmf/tex/latex/tex-gyre/ot1qbk.fd
+File: ot1qbk.fd 2009/09/25 v1.2 font definition file for OT1/qbk
+)
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count124
@@ -443,7 +442,7 @@ LaTeX Font Warning: Font shape `OMS/qbk/m/n' undefined
 
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-] [2] (./prob4.aux)
+] (./prob4.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
@@ -451,11 +450,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  5552 strings out of 493114
  76170 string characters out of 6137633
- 176699 words of memory out of 5000000
+ 176694 words of memory out of 5000000
  8916 multiletter control sequences out of 15000+600000
  21953 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 46i,11n,45p,1283b,277s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 46i,11n,45p,1283b,215s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-rm.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/share/texlive/texmf-dist/fo
@@ -469,10 +468,10 @@ fonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 usr/share/texmf/fonts/type1/public/tex-gyre/qbkb.pfb></usr/share/texmf/fonts/ty
 pe1/public/tex-gyre/qbkr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qbkr
 i.pfb>
-Output written on prob4.pdf (2 pages, 154439 bytes).
+Output written on prob4.pdf (1 page, 153927 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
- 46 compressed objects within 1 object stream
+ 61 PDF objects out of 1000 (max. 8388607)
+ 44 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
