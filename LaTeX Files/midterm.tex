@@ -1,0 +1,226 @@
+\documentclass{article}[12]
+%\setlength{\textheight}{8.4in}
+%\setlength{\topmargin}{-0.15in}
+%\setlength{\oddsidemargin}{0in}
+%\setlength{\evensidemargin}{0in}
+%\setlength{\textwidth}{6.5in}
+
+\setlength{\textheight}{8.5in}
+\setlength{\topmargin}{-.5in}
+\setlength{\oddsidemargin}{-0.25in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{7in}
+\usepackage{amsfonts, amsmath, amsthm, amssymb,mathrsfs}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage[]{algorithm2e}
+\usepackage{algorithmicx}
+\usepackage{multicol}
+\usepackage{subfiles}
+\usepackage{tgbonum}
+\pagestyle{fancy}
+\lhead{TCSS 581 - Autumn 2016}
+\chead{Mid-Term}
+\rhead{J. McFadden}
+\headsep = 22pt 
+\headheight = 15pt
+
+\doublespacing
+
+% BEGIN PRE-AMBLE
+
+
+% Setup equation numbering 
+\numberwithin{equation}{section} 
+
+%Equation Numbering Shortcut Commands
+\newcommand{\numbch}[1]{\setcounter{section}{#1} \setcounter{equation}{0}}
+%\newcommand{\numbpr}[1]{\setcounter{subsection}{#1} \setcounter{equation}{0}}
+\newcommand{\numbpr}[1]{\setcounter{section}{#1} \setcounter{equation}{0}}
+\newcommand{\note}{\textbf{NOTE:  }}
+
+%Formatting shortcut commands
+\newcommand{\chap}[1]{\begin{center}\begin{Large}\textbf{\underline{#1}}\end{Large}\end{center}}
+\newcommand{\prob}[1]{\textbf{\underline{Problem #1):}}}
+\newcommand{\sol}[1]{\textbf{\underline{Solution #1):}}}
+\newcommand{\MMA}{\emph{Mathematica }}
+
+%Text Shortcut Command
+\newcommand{\s}[1]{\emph{Side #1}}
+
+% Math shortcut commands
+\newcommand{\dd}[2]{\frac{d #1}{d #2}}
+\newcommand{\ddn}[3]{\frac{d^{#1} #2}{d #3^{#1}}}
+%\newcommand{\dd}[2]{\frac{\textrm{d} #1}{\textrm{d} #2}}
+%\newcommand{\ddn}[3]{\frac{\textrm{d}^{#1} #2}{\textrm{d} #3^{#1}}}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\pdn}[3]{\frac{\partial^{#1} #2}{\partial #3^{#1}}}
+\newcommand{\infint}{\int_{-\infty}^\infty}
+\newcommand{\infiint}{\iint_{-\infty}^\infty}
+\newcommand{\infiiint}{\iiint_{-\infty}^\infty}
+\newcommand{\dint}[2]{\int_{#1}^{#2}}
+\newcommand{\intdd}[1]{\textrm{d}#1}
+\newcommand{\intddd}[1]{\textrm{d}#1}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+%\newcommand{\mat}[1]{\overleftrightarrow{\mathbf{#1}}}
+%\newcommand{\mat}[1]{\bar{\bar{\mathbf{#1}}}}
+\newcommand{\mat}[1]{\overline{\overline{\mathbf{#1}}}}
+
+%Math Text
+\newcommand{\rect}{\text{ rect}}
+\newcommand{\csch}{\text{ csch}}
+
+%Physics Shortcut Commands
+\newcommand{\h}{\mathcal{H}}
+
+
+%MRI Stuff Shortcut Commands
+\newcommand{\tno}{t_{n}}
+\newcommand{\tn}[1]{t_{n#1}}
+\newcommand{\Mno}{\vec{M}^{\left( n \right)}}
+\newcommand{\Mn}[1]{\vec{M}^{\left( n #1 \right)}}
+\newcommand{\Mnto}[1]{\vec{M}^{(n)} \left( t_{n} #1 \right)}
+\newcommand{\Mnt}[2]{\vec{M}^{(n #1)} \left( t_{n #1} #2 \right)}
+\newcommand{\rot}[2]{\mat{R}_{#1} \left( #2 \right)}
+\newcommand{\DnMat}[2]{\mat{D} \left( t_{n #1} #2 \right)}
+\newcommand{\rotINV}[2]{\mat{R}^{-1}_{#1} \left( #2 \right)}
+\newcommand{\DnMatINV}[2]{\mat{D}^{-1} \left( t_{n #1} #2 \right)}
+\newcommand{\betaNt}[2]{\beta \left( t_{n #1} #2 \right)}
+\newcommand{\TR}{\textrm{TR}}
+
+
+% Math formatting commands
+\newcommand{\stack}[2]{\stackrel{\mathclap{\normalfont\mbox{#1}}}{#2}}
+
+
+% 
+
+
+% END PRE-AMBLE
+
+
+
+\begin{document}
+
+\begin{flushleft}
+
+
+\subfile{subfiles/prob1}
+
+
+\vspace{0.25 in}
+
+
+\subfile{subfiles/prob2}
+
+
+\vspace{0.25in}
+
+
+\numbpr{3}
+\prob{3} One-time pads are difficult to use in practice because the any key must be the same length as the message and each key can be used only once. \newline
+
+
+\vspace{0.25in}
+
+
+\subfile{subfiles/prob4}
+
+
+\vspace{0.25in}
+
+
+\subfile{subfiles/prob5}
+
+
+\vspace{0.25in}
+
+
+\numbpr{6} 
+\prob{6} Since any \textbf{CPA} secure encryption scheme requires than any message $m \in \mathcal{M}$ can be encrypted into any $c \in \mathcal{C}$ with some non-zero probability, any cipher-text $c$ can correspond to the encryption of several different messages, thereby preventing an eavesdropper from learning anything about plain-text by comparing two cipher-texts for equivalence. \newline
+
+
+\vspace{0.25in}
+
+
+\numbpr{7}
+\prob{7} Each block in a cipher-text from an encryption, under \textbf{CBC} mode of operation, is dependent on either the cipher-text from the block before it or the value of \text{{\fontfamily{cmtt}\selectfont \textbf{IV}}}, they must be encrypted or decrypted serially.  Therefore, under the \textbf{CBC} mode of operation, there is no speed increase, in either encryption and decryption, available from parallel processing. \newline
+
+
+
+
+
+
+
+\numbpr{14}
+\prob{14} Define the cipher-texts $c$ and $c'$, encrypted on a one-time pad with the same key, from messages $m$ and $m'$, respectively, as $c = m \oplus k$ and $c' = m' \oplus k$.  Now, \textbf{XOR} these expressions together to obtain
+
+\begin{align}
+c \oplus c' = \left( m \oplus k \right) \oplus \left( m' \oplus k \right) \notag
+\end{align}
+
+Since $k \oplus k = 0$, our result simplifies to
+
+\begin{align}
+c \oplus c' = m \oplus m' \notag
+\end{align}
+
+thereby giving an adversary a relation between cipher and message texts. \newline
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{flushleft}
+\end{document}

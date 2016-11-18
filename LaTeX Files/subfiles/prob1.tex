@@ -1,0 +1,59 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+\numbpr{1}
+\prob{1} We know that the expression
+
+\begin{align}
+\Pr \left[ M = m \, \vert \, C = c \right] = \Pr \left[ M = m \right], \label{eq1}
+\end{align}
+
+which holds for some encryption scheme {\fontfamily{cmtt}\selectfont \textbf{(Gen, Enc, Dec)}}. We apply Bayes' formula to the left-hand-side of expression \ref{eq1} to yield
+
+\begin{align}
+\Pr \left[ M = m \, \vert \, C = c \right] &= \frac{ \Pr \left[ M = m , C = c \right] }{ \Pr \left[ C = c \right] } \label{eq1a}
+\end{align}
+
+Since the $\Pr \left[ M = m , C = c \right]$ term in expression \ref{eq1a} represents a Joint Probability Distribution, we also have
+
+\begin{align}
+\Pr \left[ M = m , C = c \right] = \Pr \left[ M = m \right] \, \Pr \left[ C = c \, \vert \, M = m \right] \notag
+\end{align}
+
+This allows the result in expression \ref{eq1a} to be equivalently expressed as
+
+\begin{align}
+\Pr \left[ M = m \, \vert \, C = c \right] &= \frac{ \Pr \left[ M = m \right] \, \Pr \left[ C = c \, \vert \, M = m \right] }{ \Pr \left[ C = c \right] } \notag
+\end{align}
+
+which is divided by $\Pr \left[ M = m \right]$ to give
+
+\begin{align}
+\frac{\Pr \left[ M = m \, \vert \, C = c \right] }{ \Pr \left[ M = m \right]} &= \frac{\Pr \left[ C = c \, \vert \, M = m \right] }{ \Pr \left[ C = c \right]} \label{eq2}
+\end{align}
+
+By noting that expression \ref{eq1} implies
+
+\begin{align*}
+\frac{\Pr \left[ M = m \, \vert \, C = c \right] }{ \Pr \left[ M = m \right]} = 1,
+\end{align*}
+
+the result in expression \ref{eq2} becomes
+
+\begin{align}
+\frac{\Pr \left[ C = c \, \vert \, M = m \right] }{ \Pr \left[ C = c \right]} = 1 \notag
+\end{align}
+
+Multiplying this result by $\Pr \left[ C = c \right]$ gives
+
+\begin{align}
+\Pr \left[ C = c \, \vert \, M = m \right] = \Pr \left[ C = c \right],
+\end{align}
+
+thereby proving that $\Pr \left[ M = m \, \vert \, C = c \right] = \Pr \left[ M = m \right]$ implies $\Pr \left[ C = c \, \vert \, M = m \right] = \Pr \left[ C = c \right]$. \newline
+$\square$ \newline
+
+\end{flushleft}
+\end{document}

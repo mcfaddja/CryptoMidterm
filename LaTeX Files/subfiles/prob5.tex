@@ -1,0 +1,40 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+\numbpr{5}
+\prob{5} The \textbf{ECB} mode of operation is defined, it terms of the expression for the resulting cipher-text $c$, according to 
+
+\begin{align}
+c = \left\{ F_k \left( m_1 \right), F_k \left( m_2 \right), \dots, F_k \left( m_i \right), \dots, F_k \left( m_l \right) \right\}
+\end{align}
+
+where $F_k \left( m_i \right)$ is a pseudo random permutation function with key $k$ and the $m_i$ are the blocks of the message.  Since each block is directly encrypted by $F_k \left( m_i \right)$, any $m_i \in \mathcal{M}$ can result in only one unique $c_i \in \mathcal{C}$ when passed to $F_k \left( m_i \right)$ this mode is deterministic and therefore \emph{not} \textbf{CPA} secure.  Since this mode is not \textbf{CPA} secure, it \emph{cannot} be \emph{CCA} secure.  This is follows from the fact that \emph{CCA} security of an encryption scheme $\prod$ implies the \emph{CPA} security of $\prod$.  \newline
+
+We also define the \textbf{CTR} mode of operation in terms of the expression for resulting cipher-text $c$.  For this mode of operation we have 
+
+
+\begin{align}
+c = \left\{ c_0, c_1, c_2, \dots, c_i, \dots, c_l \right\}
+\end{align}
+
+with $c_0 = \text{{\fontfamily{cmtt}\selectfont \textbf{ctr}}}$ and the remaining $c_i$ defined as $c_i = r_i \oplus m_i$. Here the $m_i$ are the blocks of the message and the $r_i$ are defined, in terms of their index $i$, some random initial counter value {\fontfamily{cmtt}\selectfont \textbf{ctr}}, and the keyed pseudo random permutation function $F_k \left( r_i \right)$, according to
+
+\begin{align}
+r_i = F_k \left( \text{{\fontfamily{cmtt}\selectfont \textbf{ctr}}} + i \right)
+\end{align} 
+
+
+
+Since $r_i = F_k \left( \text{{\fontfamily{cmtt}\selectfont \textbf{ctr}}} + i \right)$ and {\fontfamily{cmtt}\selectfont \textbf{ctr}} is chosen at random, the set of all $r_i$, $r = \left\{ r_1, r_2, \dots, r_i, \dots, r_l \right\}$ represents a pseudo random sequence with the same length as the message.  This implies that result $c_i = r_i \oplus m_i$ for each block of the message $m_i$ depends on both on $m_i$ and $r_i$ instead of only $m_i$ and the keyed pseudo random permutation function $F \left( m_i \right)$.  By extension, any arbitrary message $m \in \mathcal{M}$ can be encrypted into any cipher-text $c \in \mathcal{C}$ with some non-zero probability, thereby making the \textbf{CTR} mode of operation probabilistic and thus \textbf{CPA} secure.  Since the first block of the message, $c_0$, holds the value of {\fontfamily{cmtt}\selectfont \textbf{ctr}} in the clear, the cipher-text resulting from this mode of operation is deterministic on the value of {\fontfamily{cmtt}\selectfont \textbf{ctr}}.  \newline
+
+This enables an adversary to employ a \textbf{CCA} attack by sending $m_0 = 0^n$ and $m_1 = 1^n$ to the encryption oracle, flipping the first bit of $c_1$ in the cipher-text $c$ returned by the encryption oracle to obtain $c'$, and then sending $c'$ to the decryption oracle to obtain either $10^{n-1}$ or $01^{n-1}$.  The possible results from the decryption oracle respectively imply that either $m_0$ was enciphered to into $c$ or $m_1$ was enciphered into $c$ thus giving the adversary two messages, cipher-text associated with each message, and the value of {\fontfamily{cmtt}\selectfont \textbf{ctr}} used for encrypting both message.  This information allows the adversary to eventually to recover the pseudo random permutation function $F_k$ and its associated key used in to encrypt these messages.  This attack is made possible because only the first bit in the cipher-text for $m$ was changed and this first block of cipher-text is \emph{directly} dependent on only the corresponding message block $m_1$ and the key $k$ when the the value of {\fontfamily{cmtt}\selectfont \textbf{ctr}} is known.  The \textbf{CCA} attack exploits the fact that encryption in \textbf{CTR} mode becomes deterministic the on the values of {\fontfamily{cmtt}\selectfont \textbf{ctr}} and some cipher-text are known. \newline
+
+
+
+
+\end{flushleft}
+\end{document}

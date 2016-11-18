@@ -1,0 +1,36 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+\numbpr{4}
+\prob{4} Begin by defining $\prod$ to be the encryption scheme $\prod = \left( \text{ {\fontfamily{cmtt}\selectfont \textbf{Gen}}, {\fontfamily{cmtt}\selectfont \textbf{Enc}}, {\fontfamily{cmtt}\selectfont \textbf{Dec}} } \right)$ where
+
+\begin{itemize}
+	\item The security parameter $n \in \Z$ and {\fontfamily{cmtt}\selectfont \textbf{Gen}} are used to generate the key $k$ by running $\text{{\fontfamily{cmtt}\selectfont \textbf{Gen}}} \left( 1^n \right) = k$
+	\item The key $k$, message $m$, and {\fontfamily{cmtt}\selectfont \textbf{Enc}} are used to produce cipher-text $c$ by running $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m \right) = c$
+	\item The key $k$, cipher-text $c$, and {\fontfamily{cmtt}\selectfont \textbf{Dec}} are used to recover the message $m$ by running $\text{{\fontfamily{cmtt}\selectfont \textbf{Dec}}}_k \left( c \right) = m$
+\end{itemize} 
+
+Additionally, let $m_0, m_1$ be messages of the same length and $c$ be the cipher-text generated from one of the messages by running $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_b \right) = c$, where $b = \left\{ 0, 1 \right\}$.  The encryption scheme $\prod$ is considered to be \textbf{CPA} secure if the probability of a polynomial time-limited adversary $\mathcal{A}$, with access to $m_0, m_1$ and $c$, determining which message was used to compute $c$ is equal to the sum of 1/2 and any value that is negligible on the order of $n$. \newline
+
+Now denote the experiment above as $\text{{\fontfamily{cmtt}\selectfont \textbf{Priv}}}_{\mathcal{A}, \prod}^\text{CPA} \left( n \right)$.  Let this return $0$ except when $\mathcal{A}$ is able to determine which message was used to compute $c$ then let $\text{{\fontfamily{cmtt}\selectfont \textbf{Priv}}}_{\mathcal{A}, \prod}^\text{CPA} \left( n \right)$ return $1$.  Using this notation, our definition \textbf{CPA} security can be formally stated 
+
+\begin{align}
+\Pr \left[ \text{{\fontfamily{cmtt}\selectfont \textbf{Priv}}}_{\mathcal{A}, \prod}^\text{CPA} \left( n \right) = 1 \right] \leq \frac{1}{2} + \text{ {\fontfamily{cmtt}\selectfont negl} } \left( n \right) \label{eq4}
+\end{align}
+
+where $\text{{\fontfamily{cmtt}\selectfont negl}} \left( n \right)$ is a negligible function of order $n$.  \newline
+
+Finally, consider the case for the experiment $\text{{\fontfamily{cmtt}\selectfont \textbf{Priv}}}_{\mathcal{A}, \prod}^\text{CPA} \left( n \right)$ where the messages $m_0, m_1$ passed to the adversary $\mathcal{A}$ are such that $m_0 = m_1$ and the result of $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_i \right) = c_i$ is fixed each $m_i$ in the message space. That is to say, for any fixed $k$, that each $c_i \in \mathcal{C}$ is determined by the result of $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_i \right)$ for only one $m_i \in \mathcal{M}$.  In this case the result of $\text{{\fontfamily{cmtt}\selectfont \textbf{Priv}}}_{\mathcal{A}, \prod}^\text{CPA} \left( n \right)$ will always be $1$ because the cipher-texts $c_0 = \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_0 \right)$ and $c_1 = \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_1 \right)$ are always equal thereby allowing $\mathcal{A}$ \emph{always} to succeed every time this is case.  In this case, $\prod$ does not satisfy the definition given in expression \ref{eq4} and is therefore not \textbf{CPA} secure.  Thus, we must impose an additional requirement on \textbf{CPA} secure encryption schemes.  \newline
+
+%This requirement
+The problem arises from the case when $m_0 = m_1$ and the when, for each fixed $m_i \in \mathcal{M}$, the function $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_i \right)$ always returns the the same $c_i$.  That is to say that the operation $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}_k \left( m_i \right)$ on each $m_i \in \mathcal{M}$ always determines single, unique corresponding $c_i \in \mathcal{C}$.  With this in mind, we refine our definition of \textbf{CPA} security to also include the requirement that, given a fixed key $k$, the {\fontfamily{cmtt}\selectfont \textbf{Dec}} algorithm be non-deterministic on $m \in \mathcal{M}$.  This is equivalent to requiring that the {\fontfamily{cmtt}\selectfont \textbf{Dec}} algorithm be such that any passed $m_i \in \mathcal{M}$ can return any $c \in \mathcal{C}$ with some non-zero probability, thereby making {\fontfamily{cmtt}\selectfont \textbf{Dec}} probabilistic instead of deterministic. \newline
+
+
+
+
+\end{flushleft}
+\end{document}

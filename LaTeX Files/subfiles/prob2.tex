@@ -1,0 +1,128 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+
+\numbpr{2}
+\prob{2}  For a message of length $l \in \Z^+$, a one-time pad will be associated with three separate set spaces and three different algorithms.  \newline
+
+The set spaces of a one-time pad are the key space $\mathcal{K}$, the message space $\mathcal{M}$, and the cipher-text space $\mathcal{C}$.  Additionally these spaces are such that
+
+\begin{align}
+\mathcal{K} = \mathcal{M} = \mathcal{C} = \left\{ 0, 1 \right\}^l,
+\end{align}
+
+where $\left\{ 0, 1 \right\}^l$ is the set of all binary strings having length $l$. Formally, the set $\left\{ 0, 1 \right\}^l$ is defined $\left\{ 0, 1 \right\}^l \equiv \left\{ n_1, n_2, \dots, n_l \right\}$ where $\forall i \in \left[1, l\right], n_i \ni \left[ 0, 1 \right] \subset \Z$ (i.e. either $n_i = 0,$ or $n_i = 1$ for every element in the set)\footnote{This also holds for $\mathcal{M}$ and $\mathcal{C}$}. \newline
+
+A one-time pad is also associated with the algorithms
+
+\begin{itemize}
+	\item The key-generation algorithm, denoted {\fontfamily{cmtt}\selectfont \textbf{Gen}}
+	\item The encryption algorithm, denoted {\fontfamily{cmtt}\selectfont \textbf{Enc}}
+	\item The decryption algorithm, denoted {\fontfamily{cmtt}\selectfont \textbf{Dec}}
+\end{itemize}
+
+The purpose of {\fontfamily{cmtt}\selectfont \textbf{Gen}} is to generate a key for encrypting and decrypting our message, where ee denote this key $k$ and say that $k \in \mathcal{K}$. We say that {\fontfamily{cmtt}\selectfont \textbf{Gen}} works by choosing a string from $\mathcal{K}$ according to the uniform distribution.  From this choice of distribution, it follows that each possible key will be chosen with probability $2^{-l}$. \newline
+
+Before we describe {\fontfamily{cmtt}\selectfont \textbf{Enc}} and {\fontfamily{cmtt}\selectfont \textbf{Dec}} algorithms we must define a bit-wise \textbf{XOR} on two binary strings of equal length. Let $a$ and $b$ be any two binary strings such that $a, b \in \left\{ 0, 1 \right\}^l$.  Additionally, let us express these strings by
+
+\begin{align*}
+a \equiv \left\{ a_1, a_2, \dots, a_l \right\}
+\end{align*} 
+
+and
+
+\begin{align*}
+b \equiv \left\{ b_1, b_2, \dots, b_l \right\},
+\end{align*}
+
+respectively. The bit-wise \textbf{XOR} of $a$ and $b$ is be denoted by $a \oplus b$ and expressed as the binary string
+
+\begin{align*}
+a \oplus b \equiv \left\{ a_1 \oplus b_1, a_2 \oplus b_2, \dots, a_l \oplus b_l \right\}
+\end{align*}
+
+The elements of this binary string, the $a_i \oplus b_i$, are binary bits and are defined $\forall i \in \left[ 1, l \right]$ to be the traditional bit-level \textbf{XOR} of $a_i$ and $b_i$, denoted $a_i \oplus b_i$. We use the truth table
+
+\end{flushleft} \begin{center}
+%\begin{tabular}{c | c || c}
+%$a_i$ & $b_i$ & $a_i \oplus b_i$ \\
+%\hline
+%0 & 0 & 0 \\
+%0 & 1 & 1 \\
+%1 & 0 & 1 \\
+%1 & 1 & 0
+%\end{tabular}
+\begin{tabular}{c | c c c c }
+$a_i$ & 0 & 0 & 1 & 1 \\
+\hline
+$b_i$ & 0 & 1 & 0 & 1 \\
+\hline
+\hline
+$a_i \oplus b_i$ & 0 & 1 & 1 & 0
+\end{tabular}
+\end{center} \begin{flushleft}
+
+to express the definition of the transitional bit-level \textbf{XOR} and continue to the definitions of the {\fontfamily{cmtt}\selectfont \textbf{Enc}} and {\fontfamily{cmtt}\selectfont \textbf{Dec}} algorithms. \newline
+
+The {\fontfamily{cmtt}\selectfont \textbf{Enc}} algorithm is used to encrypt the message into cipher-text based on the chosen key.  We will denote the message to be encrypted by $m$, the cipher-text resulting from the encryption by $c$, and the key by $k$.  These will each be such that $m \in \mathcal{M}$, $c \in \mathcal{C}$, and $k \in \mathcal{K}$.  Using this notation and our definition for bitwise \textbf{XOR} from above, we define
+
+\begin{align*}
+c := m \oplus k
+\end{align*}
+
+to be the expression used by {\fontfamily{cmtt}\selectfont \textbf{Enc}} as it encrypts the message. \newline
+
+
+Inversely from the {\fontfamily{cmtt}\selectfont \textbf{Enc}} algorithm, the {\fontfamily{cmtt}\selectfont \textbf{Dec}} algorithm is used to decrypt the cipher-text back into the message based on the supplied key.  Similarly to {\fontfamily{cmtt}\selectfont \textbf{Enc}}, we define
+
+\begin{align*}
+m := c \oplus k
+\end{align*}
+
+to be the expression used by {\fontfamily{cmtt}\selectfont \textbf{Dec}} as it decrypts the message. \newline
+
+To prove the security of this one-time pad, consider any arbitrary message $m$ and any arbitrary cipher-text $c$, where $m \in \mathcal{M}$ and $c \in \mathbb{C}$. Now, we express the probability of finding a particular $c$, given a particular $m$ by
+
+\begin{align}
+\Pr \left[ C = c \, \vert \, M = m \right] \label{eq2}
+\end{align}
+
+Using the fact that $c = m \oplus k$, this expression may be rewritten as
+
+\begin{align}
+\Pr \left[ C = c \, \vert \, M = m \right] &= \Pr \left[ M \oplus K = c \, \vert \, M = m \right] \notag \\
+&= \Pr \left[ M \oplus K = c \, \vert \, M = m \right] = \Pr \left[ m \oplus K = c \right] \notag
+\end{align}
+
+Next, we \textbf{XOR} the random variable term in the right-hand term of this expression by $m$ to obtain
+
+\begin{align}
+\Pr \left[ m \oplus \left( m \oplus K \right) = m \oplus c \right] = \Pr \left[ K = m \oplus c \right], \notag
+\end{align}
+
+because $a \oplus a = 0$ for any binary string $a$.  Above, we defined the probability of choosing any $k$ to be $\Pr \left[ K = k \right] = 2^{-l}$.  This allows us to finally obtain the relations
+
+\begin{align}
+\Pr \left[ C = c \, \vert \, M = m \right] &= \Pr \left[ M \oplus K = c \, \vert \, M = m \right] \notag \\
+&= \Pr \left[ m \oplus K = c \right] \notag \\
+&= \Pr \left[ m \oplus \left( m \oplus K \right) = m \oplus c \right] \notag \\
+&= \Pr \left[ K = m \oplus c \right] = \frac{1}{2^l} \label{eq2a}
+\end{align}
+
+Since or choice of $m$ in expression \ref{eq2} was arbitrary, the result in expression \ref{eq2a} must hold for any $m \in \mathcal{M}$.  This implies that, for any $m_0, m_1 \in \mathcal{M}$, we relation
+
+\begin{align}
+\Pr \left[ K = m_0 \oplus c \right] = \frac{1}{2^l} = \Pr \left[ K = m_1 \oplus c \right] \notag
+\end{align}
+
+holds.  This satisfies \emph{Lemma 2.3} from the text, thus the one-time pad is perfectly secure. \newline
+
+
+
+
+\end{flushleft}
+\end{document}
