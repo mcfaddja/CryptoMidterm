@@ -1,0 +1,40 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+
+\numbpr{9}
+\prob{9} We can calculate the probability of finding a collision here.  There are $N_{TOT} = \prod_{i = 1}^l \left\{ 2^n \right\} = \left( 2^n \right)^l$ total possible messages with $l$ blocks and block-length $n$.  Out of these, there are $N_{NO-COL} = \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\}$ messages that will have no collisions because one message is removed from the number available for each subsequent block. Therefore, the number of messages with collisions in the \emph{must} be
+
+\begin{align}
+N_{COL} = N_{TOT} - N_{NO-COL} &= \prod_{i = 1}^l \left\{ 2^n \right\} - \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\} \notag \\
+&= \left( 2^n \right)^l - \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\}
+\end{align}
+
+
+This allows the probability  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{flushleft}
+\end{document}
