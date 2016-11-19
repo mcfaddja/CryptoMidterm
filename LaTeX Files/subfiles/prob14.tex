@@ -1,0 +1,73 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+
+
+\numbpr{14}
+\prob{14}  This encryption approach will accept an input message along with two $n$-bit keys, where $n = 128$, $256$, or $512$ bits.  The block level encryption algorithm for this will be \textbf{AES} with $n$-bits.  This system uses the following steps to encrypt a message
+
+\begin{itemize}
+	\item Read the input into an array of Strings with $l$ total Strings.  This array will be denoted $m \left[ \right]$.
+	\item An overall message identifier, $r_{MSG}$, will be chosen at random and stored as an $n$-bit number.
+	\item A value for a counter, $ctr$, to be used in the \textbf{CTR} mode of encryption will be randomly chosen.
+	\item The length of the longest string in $m \left[ \right]$ will be found and stored as $l_{TEMP}$.
+	\item The number of blocks per message line will be computed according to $l_i = \text{ceil} \left( l_{TEMP} / n \right)$.
+	\item For each message line, $i = 1:l$, the initial message stored in $m \left[ i \right]$ will be copied into a temporary string $tempM$.  This temporary string will then be padded with random data until its length is equal to $l_i \cdot n$, thereby allowing it to be broken into $l_i$ blocks of equal size.
+	\item A message line identifier, $r_i$, will be chosen at random and stored.
+	\item A \textbf{MAC}-tag will be computed for this line by computing the \textbf{CBC-MAC} of $\left( r_i, i, \left| m_i \right|, m_i \right)$ using $k_3 = r_i \oplus k_2$.  Here, $r_i$, $i$, $l$, and $\left| m_i \right|$ will all be stored as $n$-bit numbers, just as $r_{MSG}$ was.  The value of the \textbf{CBC-MAC} for a line $i$ will be stored as $t_i$.
+	\item Each message line will have $l_i + 4$ blocks of cipher-text, with each block being $n$-bits long. 
+	\begin{itemize}
+		\item The first extra block, to be added to the beginning of the cipher-text for the line will be the encryption of of $r_i$ for that line of the message.
+		\item The second extra block, will be added immediately after the first extra block will contain the encryption of the $n$-bit value for $i$.
+		\item The third extra block, as previously, will be added immediately after the second and will contain the encrypted $n$-bit value for $\left| m_i \right|$.  
+		\item The fourth extra block will be added to the end of the cipher-text for the line will be the encryption of the $t_i$ value for this line.  These encryptions will use the same key as the key used for encrypting the message text, $k_1$.
+	\end{itemize}
+	\item Therefore, for a given line of the message, will have the cipher text 
+	\begin{align*}
+	c_i = \left\{ \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( r_i \right), \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( i \right), \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( \left| m_i \right| \right), \text{ \textbf{for} } j = 1:l_i \; \left[ \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( m_j \right) \right], \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( t_i \right) \right\}
+	\end{align*}
+	\item The cipher-text for the entire message will be completed by running this for all message lines $i = 1:l$ (resulting in cipher-text lines $c_i$ for $i = 1:l$), followed by pre-pending the initial value for $ctr$ (in the clear), the encrypted value of $r_{MSG}$, the encrypted value of $l_i$, and the encrypted value of $l$.
+	\item Next, a \textbf{MAC}-tag for the entire message will be computed using $\text{{\fontfamily{cmtt}\selectfont \textbf{SHA-256}}}_{k_2} \left( ctr, r_{MSG}, l_i, l, m \right)$, where $m$ is the unaltered message (i.e. no $r_i$, $t_i$, etc.).  This \textbf{MAC}-tag will be stored as $t_{MSG}$, then be encrypted by $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( t_{MSG} \right)$.  The result of this encryption will be appended to the end of the complete cipher-text described above.
+	\item This means that the cipher-text of the entire message can be represented according to
+	\begin{align*}
+	c = \left\{ ctr, \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( r_{MSG} \right), \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( l_i \right), \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( l \right), \text{\textbf{ for }} i=1:l \; \left[ c_i \right], \, \text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1} \left( t_{MSG} \right) \right\}
+	\end{align*}
+\end{itemize}
+
+To decrypt a message, this system will follow the following steps
+
+\begin{itemize}
+	\item Remove the first $n$ bit block.  This will be stored as $ctr$.  Decrypt the remaining blocks using $\text{{\fontfamily{cmtt}\selectfont \textbf{Enc}}}^{ctr}_{k_1}$
+	\item Recover $r_{MSG}$ from the first decrypted block of cipher-text, $l_i$ from the second, and $l$ from the third.
+	\item Use $l$ to determine how many lines of cipher-text there are to decrypt and $l_i$ to determine how many blocks there are per line.
+	\item Using the values of $l$ and $l_i$, along with the knowledge that each line of cipher text has four blocks that are not related to the message, reconstruct the message text (including padding), and store the $r_i$, $i$, $\left| m \right|$, and $t_i$ values for each line.
+	\item Use the value of $\left| m \right|$ to strip off the padding characters for each line.  
+	\item Use the restored message line along with $\left| m \right|$, $i$, and $r_i$ to compute the \textbf{CBC-MAC} for that line, as described above.  Compare this computed value to the one stored in $t_i$, if they match then proceed to the next line.
+	\item Once the message has finally had all the padding stripped off through the last line, use all of the just decrypted information to compute $t_{MSG}$ as described above.  Compare this computed value for $t_{MSG}$ to the one passed and decrypted from the message. If they match, the message is authentic and decryption is complete.
+\end{itemize}
+
+The features of this system, and their reasoning, are
+
+\begin{itemize}
+	\item The is a \textbf{MAC}-tag for each line of the message - This allows messages to be broken into pieces (packets) and still be securely encrypted and authenticated with the same two keys.  
+	\item Each line is authenticated independently - With every having a tag that is independent other lines and of the entire message, providing both authentication for each line in addition to a check on the authentication of the entire message.
+	\item Padding by line - This allows packets with differently lengths to be sent without giving an adversary any information about the size of each line.  All the adversary can know is the length of the longest line.
+	\item Random identifiers at both the message and line levels - This prevents an adversary from swapping message lines or forging the entire message.
+	\item Counter for every line - This prevents an adversary from swapping message blocks.
+	\item Using \textbf{CBC-MAC} for per line authentication - This provides an authentication scheme for every line of the message that is independent of both the encryption of that line (or the entire message) and the authentication for the entire message.  This is why the \textbf{CBC-MAC} authentication uses the \textbf{XOR} of the second (authentication) key and the random line identifier ($r_i$) as its key.  This also means that message encryption (using \textbf{AES} in \textbf{CTR} mode) and full message authentication (using \textbf{SHA-256}) employ different techniques from that used for the authentication of each line. 
+	\item The use of \textbf{AES} in \textbf{CTR} mode allows for the encryption of messages in a relatively parallel fashion, the number of blocks in each line is known so the counter value for any block in any line is know before encryption starts based on the steps in this scheme and the size of the message.  The only limitation will be if computing the \textbf{CBC-MAC} for each line is time-consuming.  However, since the \textbf{CBC-MAC} of each line is independent of all other lines the \textbf{CBC-MAC} for multiple lines may be computed simultaneously.
+	\item The use of \textbf{SHA-256} to compute a full message level authentication tag - This tag is computed based message level information that need not be repeated for every line.  This limits the chance of a collision between the \textbf{CBC-MAC} tags for each line.  If the \textbf{MAC}-tag for each line included this, it would increase the chance of collisions, however slightly, as the \textbf{CBC-MAC} tags for any two lines would be guaranteed to have at least this information in common.  Additionally, this would increase the time required to compute the \textbf{CBC-MAC} for each line by increasing the amount of information being passed, since every line has a \textbf{CBC-MAC} tag, this overhead could become significant.  Finally, the full message \textbf{MAC}-tag also serves to ensure that the value of $ctr$ (which \emph{must} be passed in the clear) has not been tampered with and is indeed genuine.
+\end{itemize}
+
+Because this system relies on keys that are of either $128$, $256$ or $512$-bits in length, the system would be secure for sending packets on a network with a packet size of 500 bits.  This is because this system would treat each packet as a "line", and each line is securely authenticated individually. \newline
+
+
+
+
+
+\end{flushleft}
+\end{document}

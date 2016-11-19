@@ -5,7 +5,7 @@
 %\setlength{\evensidemargin}{0in}
 %\setlength{\textwidth}{6.5in}
 
-\setlength{\textheight}{8.5in}
+\setlength{\textheight}{8.75in}
 \setlength{\topmargin}{-.5in}
 \setlength{\oddsidemargin}{-0.25in}
 \setlength{\evensidemargin}{0in}
@@ -28,7 +28,7 @@
 \headsep = 22pt 
 \headheight = 15pt
 
-%\doublespacing
+\doublespacing
 
 % BEGIN PRE-AMBLE
 
@@ -221,8 +221,14 @@ as the new definition for {\fontfamily{cmtt}\selectfont \textbf{Dec}}. \newline
 \vspace{0.25in}
 
 
+\subfile{subfiles/prob14}
 
 
+\vspace{0.25in}
+
+
+\numbpr{15}
+\prob{15}  Yes, the system proposed in \textbf{Problem 14} would be able to securely handle packets of varying sizes.  This is due to the fact that the algorithm pads all packets to a the multiple of $n$-bits required to encode the largest packet, thus an adversary will not be able to determine anything except an upper bound for the length of the largest packet.
 
 
 
