@@ -7,7 +7,7 @@
 
 
 \numbpr{9}
-\prob{9} We can calculate the probability of finding a collision here.  There are $N_{TOT} = \prod_{i = 1}^l \left\{ 2^n \right\} = \left( 2^n \right)^l$ total possible messages with $l$ blocks and block-length $n$.  Out of these, there are $N_{NO-COL} = \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\}$ messages that will have no collisions because one message is removed from the number available for each subsequent block. Therefore, the number of messages with collisions in the \emph{must} be
+\prob{9} We can calculate the probability of finding a collision here.  There are $N_{TOT} = \prod_{i = 1}^l \left\{ 2^n \right\} =$ $= \left( 2^n \right)^l$ total possible messages with $l$ blocks and block-length $n$.  Out of these, there are $N_{NO-COL} =$ $= \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\}$ messages that will have no collisions because one message is removed from the number available for each subsequent block. Therefore, the number of messages with collisions in the \emph{must} be
 
 \begin{align}
 N_{COL} = N_{TOT} - N_{NO-COL} &= \prod_{i = 1}^l \left\{ 2^n \right\} - \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\} \notag \\
@@ -15,22 +15,13 @@ N_{COL} = N_{TOT} - N_{NO-COL} &= \prod_{i = 1}^l \left\{ 2^n \right\} - \prod_{
 \end{align}
 
 
-This allows the probability  
+This allows the probability of finding a collision to be given as 
 
+\begin{align}
+\Pr \left[ COL \right] = 1 - \prod_{i = 1}^l \left\{ 2^n - i + 1 \right\}
+\end{align}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+For sufficiently large $n$, this yields an acceptable probability of collision, therefore this hash function would be secure within the Merkle-Damgard paradigm.
 
 
 
