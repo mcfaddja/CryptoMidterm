@@ -1,0 +1,35 @@
+\documentclass[../midterm.tex]{subfiles}
+
+\begin{document}
+\begin{flushleft}
+
+
+
+
+\numbpr{8}
+\prob{8}  This \textbf{MAC} is \emph{not} secure due to the high probability of collisions.  To see this, consider any two messages $m, m^\star \in \mathcal{M}$ such that $m = \left\{ m_1, m_2, \dots, m_k, \dots, m_l \right\}$, $m^\star = \left\{ m_1^\star, m_2^\star, \dots, m_k^\star, \dots, m_l^\star \right\}$, $m_i = m^\star_j$, $m_j = m^\star_i$, and $m_k = m^\star_k$ for all other $k < l$.  Then, clearly we have
+
+\begin{align*}
+t = F_k \left( m_1 \right) \oplus F_k \left( m_2 \right) \oplus \cdots F_k \left( m_i \right) \oplus \cdots \oplus F_k \left( m_j \right) \oplus \cdots \oplus F_k \left( m_l \right)
+\end{align*}
+
+which, by the the of \textbf{XOR}, is equivalent to 
+
+\begin{align*}
+t = F_k \left( m_1 \right) \oplus F_k \left( m_2 \right) \oplus \cdots F_k \left( m_j \right) \oplus \cdots \oplus F_k \left( m_i \right) \oplus \cdots \oplus F_k \left( m_l \right)
+\end{align*}
+
+Applying our definitions for $m$ and $m^\star$ from above, we clearly see that
+
+\begin{align*}
+t &= F_k \left( m_1 \right) \oplus F_k \left( m_2 \right) \oplus \cdots F_k \left( m_j \right) \oplus \cdots \oplus F_k \left( m_i \right) \oplus \cdots \oplus F_k \left( m_l \right) \\
+&= F_k \left( m^\star_1 \right) \oplus F_k \left( m^\star_2 \right) \oplus \cdots F_k \left( m^\star_i \right) \oplus \cdots \oplus F_k \left( m^\star_j \right) \oplus \cdots \oplus F_k \left( m^\star_l \right) = t^\star
+\end{align*}
+
+thereby showing collisoins for this hash function. \newline
+
+
+
+
+\end{flushleft}
+\end{document}
